@@ -1,8 +1,4 @@
 <script setup>
-const { data: info } = await useFetch('http://localhost:3001/verify')
-definePageMeta({
-  layout: false,
-});
 </script>
 
 <template>
@@ -17,7 +13,9 @@ definePageMeta({
 
     @import url("https://fonts.googleapis.com/css?family=Ubuntu");
     body {
+        height: 100vh;
         font-family: "Ubuntu";
+        overflow: hidden;
     }
 
 </style>

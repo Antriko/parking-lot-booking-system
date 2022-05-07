@@ -93,6 +93,10 @@ app.post('/forgot', async function(req, res) {
     res.status(200).send("Password updated");
 })
 
+app.get('/logout', function(req, res) {
+    res.clearCookie("token").end();
+});
+
 app.get('/verify', function(req, res) {
     token = req.cookies.token
     if (!token) {
@@ -103,8 +107,8 @@ app.get('/verify', function(req, res) {
 
     jwt.verify(token, secret, (err, dec) => {
         console.log(dec)
+        res.status(200).send(dec);
     })
-    res.sendStatus(200);
 })
 
 
