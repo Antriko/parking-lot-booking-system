@@ -9,13 +9,12 @@
 </template>
 
 <style> 
-    @import "@/assets/css/tachyons.min.css";
+@import "@/assets/css/tachyons.min.css";
 
-    @import url("https://fonts.googleapis.com/css?family=Ubuntu");
-    body {
-        height: 100vh;
-        font-family: "Ubuntu";
-        overflow: hidden;
-    }
-
+@import url("https://fonts.googleapis.com/css?family=Nunito");
+body {
+    height: 100vh;
+    font-family: "Nunito";
+    overflow: hidden;
+}
 </style>

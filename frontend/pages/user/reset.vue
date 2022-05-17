@@ -46,7 +46,7 @@ export default {
         <form class="pa4 pt7-l pa5-l w-100 w-30-l bg-white ml6-l vh-100" @submit.prevent="handleSubmit">
             <div class="flex flex-wrap w-100 pb3">
                 <div class="w-50 black b f2">
-                    Reset password
+                    Forgot
                 </div>
                 <div class="w-50 red self-end tr" v-if="message">
                     {{ message }}
@@ -63,7 +63,7 @@ export default {
                 <button class="w-100 w-25-m button-reset link dim br1 ph3 pv2 mb2 bg-white pointer">Reset</button>
             </div>
 
-            <div class="flex flex-column">
+            <div class="flex flex-column mt5-l">
                 <div class="mv1 pv1">
                     <NuxtLink class="link btn black dim mv1 pv1" to="/user/login">Login</NuxtLink>
                 </div>

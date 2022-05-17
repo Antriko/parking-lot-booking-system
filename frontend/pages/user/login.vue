@@ -63,7 +63,7 @@ export default {
                 <button class="w-100 w-25-m button-reset link dim br2 ph3 pv2 mb2 bg-white pointer">Login</button>
             </div>
 
-            <div class="flex flex-column">
+            <div class="flex flex-column mt5-l">
                 <div class="mv1 pv1">
                     <NuxtLink class="link black dim" to="/user/register">Register</NuxtLink>
                 </div>

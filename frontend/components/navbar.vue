@@ -11,11 +11,11 @@ const { data: data } = await $fetch("http://localhost:3001/verify", {
         </div>
 
         
-        <div class="flex pa3 flex items-center mr4" v-if="!data">
+        <div class="flex pa3 flex items-center mr4-l" v-if="!data">
             <NuxtLink class="link white dim mh1 pa1" to="/user/login">Login</NuxtLink>
         </div>
 
-        <div class="flex pa3 flex items-center mr4" v-else>
+        <div class="flex pa3 flex items-center mr4-l" v-else>
             <NuxtLink class="link white dim mh1 pa1" to="/user/user">{{data.username}}</NuxtLink>
         </div>
         
