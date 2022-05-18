@@ -22,6 +22,7 @@ secret = process.env.JWT_SECRET
 
 // MySQL database
 const { Sequelize, Model, DataTypes } = require('sequelize');
+const { reset } = require('nodemon');
 const db = new Sequelize(process.env.DB_DATABASE, process.env.DB_USERNAME, process.env.DB_PASSWORD, {
     host: process.env.DB_HOST,
     dialect: "mysql"
@@ -37,7 +38,7 @@ const db = new Sequelize(process.env.DB_DATABASE, process.env.DB_USERNAME, proce
 
 
 // User login
-app.post('/login', async function(req, res) {
+app.post('/login', async (req, res) => {
     user = await db.query(`SELECT * FROM user WHERE username='${req.body.username}'`, { type: Sequelize.QueryTypes.SELECT })
         .catch(e => console.log(e));
     console.log(req.body, user)
@@ -61,7 +62,7 @@ app.post('/login', async function(req, res) {
     res.status(201).send("Incorrect password");
 })
 
-app.post('/register', async function(req, res, next) {
+app.post('/register', async (req, res, next) => {
     user = await db.query(`SELECT * FROM user WHERE username='${req.body.username}'`, { type: Sequelize.QueryTypes.SELECT })
         .catch(e => next(console.log(e)));
     console.log(req.body, user, user.length)
@@ -77,7 +78,7 @@ app.post('/register', async function(req, res, next) {
     res.status(200).send("User created");
 })
 
-app.post('/forgot', async function(req, res) {
+app.post('/forgot', async (req, res) => {
     user = await db.query(`SELECT * FROM user WHERE username='${req.body.username}'`, { type: Sequelize.QueryTypes.SELECT })
         .catch(e => next(console.log(e)));
     console.log(req.body, user, user.length)
@@ -93,11 +94,11 @@ app.post('/forgot', async function(req, res) {
     res.status(200).send("Password updated");
 })
 
-app.get('/logout', function(req, res) {
+app.get('/logout', (req, res) => {
     res.clearCookie("token").end();
 });
 
-app.get('/verify', function(req, res) {
+app.get('/verify', (req, res) => {
     token = req.cookies.token
     if (!token) {
         console.log("No token")
@@ -109,6 +110,32 @@ app.get('/verify', function(req, res) {
         console.log(dec)
         res.status(200).send(dec);
     })
+})
+
+
+app.post('/book', (req, res) => {
+    // Convert to MySQL date format
+    // 30 minute intervals
+    dateFrom = new Date(req.body.dateFrom);
+    dateTo = new Date(req.body.dateTo);
+    while (dateFrom.getMinutes() != 0 && dateFrom.getMinutes() != 30) {
+        dateFrom = new Date(dateFrom.getTime() - 60000)
+    }
+    while (dateTo.getMinutes() != 0 && dateTo.getMinutes() != 30) {
+        dateTo = new Date(dateTo.getTime() + 60000)
+    }
+    
+    var token = jwt.verify(req.cookies.token, secret, (err, dec) => {
+        if(err) {
+            res.sendStatus(400);
+        }
+        return dec.data
+    })
+    
+    console.log(token.username)
+    console.log("From\t", dateFrom.toISOString().slice(0, 19).replace('T', ' '))
+    console.log("To\t", dateTo.toISOString().slice(0, 19).replace('T', ' '))
+    res.sendStatus(200);
 })
 
 

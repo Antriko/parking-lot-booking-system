@@ -7,7 +7,7 @@ const { data: data } = await $fetch("http://localhost:3001/verify", {
 <template>
     <nav class="flex justify-between white bg-dark-gray">
         <div class="flex pa3">
-            <NuxtLink class="link white dim mh1 pa1" to="/">Icon</NuxtLink>
+            <NuxtLink class="link white dim mh1 pa1" to="/">Parking lot booking system</NuxtLink>
         </div>
 
         
