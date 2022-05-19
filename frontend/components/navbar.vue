@@ -1,6 +1,6 @@
 <script setup>
 const { data: data } = await $fetch("http://localhost:3001/verify", {
-    credentials: "include",
+    credentials: "include"
 })
 </script>
 
