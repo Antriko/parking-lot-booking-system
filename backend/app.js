@@ -116,6 +116,11 @@ app.post('/book', authUser, async (req, res) => {
     // 30 minute intervals
     dateFrom = new Date(req.body.dateFrom);
     dateTo = new Date(req.body.dateTo);
+
+    if (dateFrom > dateTo) {
+        res.status(201).send("Invalid date");
+    }
+
     while (dateFrom.getMinutes() != 0 && dateFrom.getMinutes() != 30) {
         dateFrom = new Date(dateFrom.getTime() - 60000)
     }
@@ -138,7 +143,7 @@ app.post('/book', authUser, async (req, res) => {
     await db.query(`INSERT INTO bookings (UserID, timeFrom, timeTo, parkingSlot) VALUES ('${token.ID}', '${dateFrom}', '${dateTo}', '${req.body.spot}')`)
         .catch(e => {console.log(e)})
 
-    res.sendStatus(200);
+    res.status(200).send();
 })
 
 app.post('/availability', authUser, async (req, res) => {
@@ -158,7 +163,7 @@ app.post('/availability', authUser, async (req, res) => {
     console.log("\nFrom\t", dateFrom, "\nTo\t", dateTo, "\nKeep in mind of timezones.")
 
     // Get all spots that are not available for that time period, so available spots will be shown
-    spots = await db.query(`SELECT parkingSlot FROM bookings WHERE (timeFrom > cast('${dateFrom}' as datetime) && timeFrom < cast('${dateTo}' as datetime)) || (timeTo > cast('${dateFrom}' as datetime) && timeTo < cast('${dateTo}' as datetime)) || (timeFrom < cast('${dateFrom}' as datetime) && timeTo > cast('${dateTo}' as datetime))`, 
+    spots = await db.query(`SELECT parkingSlot FROM bookings WHERE (timeFrom >= cast('${dateFrom}' as datetime) && timeFrom < cast('${dateTo}' as datetime)) || (timeTo > cast('${dateFrom}' as datetime) && timeTo <= cast('${dateTo}' as datetime)) || (timeFrom < cast('${dateFrom}' as datetime) && timeTo >= cast('${dateTo}' as datetime))`, 
         { type: Sequelize.QueryTypes.SELECT })
         .catch(e => console.log(e));
 
