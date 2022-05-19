@@ -1,10 +1,19 @@
 <script setup>
+// https://github.com/nuxt/framework/issues/3141 - Error When Fast Navigating "Failed to execute 'insertBefore' on 'Node'"
 const token = useCookie("token")
 if (!token._value) {
-    // Or if user hasn't completed their profile, adding vehicle
     navigateTo("/user/login")
 }
-// Get current days availability API
+
+var vehicleInfo = await $fetch("http://localhost:3001/getVehicle", {
+    credentials: "include"
+})
+if(vehicleInfo.length > 0) {
+    vehicleInfo = vehicleInfo[0]
+} else {
+    navigateTo("/user/vehicle")
+}
+
 </script>
 
 <script>
@@ -25,11 +34,14 @@ export default {
         changeZone: function(event) {
             // Check if spot is available?
 
+            // Can't select before choosing time and invalid times
+            if ([...event.target.classList].includes("bg-white") || [...event.target.classList].includes("bg-light-red")) {
+                return
+            }
+
             document.querySelectorAll('.parkingSpot').forEach(function(spot) {
                 spot.classList.remove("selected")
-                spot.classList.add("bg-white")
             });
-            event.currentTarget.classList.remove("bg-white");
             event.currentTarget.classList.add("selected");
             this.spotSelected = parseInt(event.currentTarget.id.replace("Parking", ""));
             this.message = null;
@@ -76,13 +88,17 @@ export default {
 
             document.querySelectorAll('.parkingSpot').forEach(function(spot) {
                 spot.classList.remove("bg-white")
+                spot.classList.remove("bg-light-red")
                 spot.classList.add("bg-light-green")
             });
             slots.forEach( slot => {
                 var parkingSpot = document.getElementById(`Parking${slot.parkingSlot}`)
                 parkingSpot.classList.remove("bg-light-green")
+                parkingSpot.classList.remove("selected")
                 parkingSpot.classList.add("bg-light-red")
             })
+            this.spotSelected = null;
+
         },
         handleSubmit: async function() {
             if (!document.getElementById("timeFrom").value && !document.getElementById("timeTo").value) {
@@ -109,7 +125,11 @@ export default {
                 }
             })
 
-            this.message = "Booking done"
+            if (booking) {
+                this.message = booking
+            } else {
+                this.$router.push('/user/bookings');
+            }
         }
     }
 }
@@ -134,7 +154,6 @@ export default {
                             <input class="f4 f3-l b bn w-100 mt2" type="time" id="timeTo" v-on:change="verifyTime">
                         </div>
                         <div class="w-100 mt2 f5 tc">*Will be rounded to nearest 30 minute interval</div>
-                        <!-- TODO Find a better time picker for 30 minute intervals -->
                     </div>
                 </div>
 
@@ -145,8 +164,8 @@ export default {
                                 Your vehicle details:
                             </div>
                             <div class="w-100 w-60-l flex flex-column tr">
-                                <div class="w-100">vehicle name</div>
-                                <div class="w-100">reg plate</div>
+                                <div class="w-100">{{ vehicleInfo.vehicleName }}</div>
+                                <div class="w-100">{{ vehicleInfo.vehicleReg }}</div>
                             </div>
                         </div>
                         <div class="w-100 f5 pt3 pt0-l">

@@ -3,6 +3,10 @@ const token = useCookie("token")
 if (!token._value) {
     navigateTo("/")
 }
+
+var vehicleInfo = await $fetch("http://localhost:3001/getVehicle", {
+    credentials: "include"
+})
 </script>
 
 <script>
@@ -20,6 +24,27 @@ export default {
 
 <template>
     <div class="flex flex-wrap pa3 pa5-l">
+        <div class="flex flex-wrap-reverse flex-wrap-l w-100 mt3 mb3 f2" v-if="vehicleInfo.length > 0">
+            <div class="w-100 w-25-l">
+                <NuxtLink class="link black dim b" to="/user/vehicle">Amend vehicle</NuxtLink>
+            </div>
+            <div class="flex flex-wrap w-100 w-50-l">
+                <div class="w-100 f3">
+                    Current vehicle
+                </div>
+                <div class="w-100">
+                    {{ vehicleInfo[0].vehicleName }}
+                </div>
+                <div class="w-100">
+                    {{ vehicleInfo[0].vehicleReg }}
+                </div>
+            </div>
+        </div>
+        <div class="flex flex-wrap w-100 mb3 f2" v-else>
+            <div class="w-100">
+                <NuxtLink class="link black dim b" to="/user/vehicle">Add vehicle</NuxtLink>
+            </div>
+        </div>
         <div class="w-100 mt3 mb3 f2">
             <NuxtLink class="link black dim b" to="/user/bookings">View bookings</NuxtLink>
         </div>

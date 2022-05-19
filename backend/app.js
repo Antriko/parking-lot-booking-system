@@ -185,6 +185,49 @@ app.get('/bookings', authUser, async (req, res) => {
     res.status(200).send(bookings);
 })
 
+app.post('/vehicle', authUser, async (req, res) => {
+    var token = jwt.verify(req.cookies.token, secret, (err, dec) => {
+        if(err) {
+            res.sendStatus(201);
+        }
+        return dec.data
+    })
+
+    // Check if there is a entry of that user already, if so then update otherwise insert new
+
+    vehicle = await db.query(`SELECT * FROM vehicle WHERE UserID=${token.ID}`, { type: Sequelize.QueryTypes.SELECT })
+        .catch(e => console.log(e));
+
+    console.log(vehicle)
+
+    if(vehicle.length > 0) {
+
+        // Update
+        await db.query(`UPDATE vehicle SET vehicleName='${req.body.vehicleName}', vehicleReg='${req.body.regPlate}' WHERE UserID=${token.ID}`)
+        res.sendStatus(200);
+        return;
+    }
+
+    await db.query(`INSERT INTO vehicle (UserID, vehicleName, vehicleReg) VALUES ('${token.ID}', '${req.body.vehicleName}', '${req.body.regPlate}')`)
+        .catch(e => console.log(e));
+
+    res.sendStatus(200);
+})
+
+app.get('/getVehicle', authUser, async (req, res) => {
+    var token = jwt.verify(req.cookies.token, secret, (err, dec) => {
+        if(err) {
+            res.sendStatus(201);
+        }
+        return dec.data
+    })
+
+    vehicle = await db.query(`SELECT * FROM vehicle WHERE UserID=${token.ID}`, { type: Sequelize.QueryTypes.SELECT })
+        .catch(e => console.log(e));
+
+    res.status(200).send(vehicle);
+})
+
 
 console.log("😄")
 app.listen(3001);

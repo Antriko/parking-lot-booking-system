@@ -76,7 +76,7 @@ export default {
     </div>
 </template>
 
-<style>
+<style scoped>
 @media only screen and (min-width: 960px) { 
     .form-design {
         background: url("@/assets/images/two.jpg") no-repeat center center fixed;
