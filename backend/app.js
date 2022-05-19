@@ -31,6 +31,11 @@ const db = new Sequelize(process.env.DB_DATABASE, process.env.DB_USERNAME, proce
 });
 
 (async () => {
+    // Create database
+    await db.query(`CREATE DATABASE IF NOT EXISTS ${process.env.DB_DATABASE}`)
+        .catch(e => console.log("caught", e))
+
+
     // Create all needed tables for app
     await db.query("CREATE TABLE IF NOT EXISTS `user` (`ID` int(11) NOT NULL AUTO_INCREMENT, `username` varchar(16) NOT NULL, `password` varchar(16) NOT NULL, PRIMARY KEY (`ID`))")
         .catch(e => console.log("caught", e))
