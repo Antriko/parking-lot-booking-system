@@ -31,13 +31,15 @@ const db = new Sequelize(process.env.DB_DATABASE, process.env.DB_USERNAME, proce
 });
 
 (async () => {
-    // Create all tables for app
+    // Create all needed tables for app
     await db.query("CREATE TABLE IF NOT EXISTS `user` (`ID` int(11) NOT NULL AUTO_INCREMENT, `username` varchar(16) NOT NULL, `password` varchar(16) NOT NULL, PRIMARY KEY (`ID`))")
         .catch(e => console.log("caught", e))
 
     await db.query("CREATE TABLE IF NOT EXISTS `parkinglot`.`bookings` ( `ID` INT NOT NULL AUTO_INCREMENT , `UserID` INT NOT NULL , `timeFrom` DATETIME NOT NULL , `timeTo` DATETIME NOT NULL , `parkingSlot` INT NOT NULL , PRIMARY KEY (`ID`))")
-    .catch(e => console.log("caught", e))
-    
+        .catch(e => console.log("caught", e))
+
+    await db.query("CREATE TABLE IF NOT EXISTS `vehicle` (`ID` int(11) NOT NULL AUTO_INCREMENT, `UserID` int(11) NOT NULL, `vehicleName` varchar(45) NOT NULL, `vehicleReg` varchar(45) NOT NULL, PRIMARY KEY (`ID`))")
+        .catch(e => console.log("caught", e))
 })();
 
 
