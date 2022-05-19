@@ -15,12 +15,13 @@ export default {
     },
     methods: {
         handleSubmit: async function() {
-            const login = await $fetch("http://localhost:3001/login", {
+            console.log(this.form)
+            const login = await $fetch("http://localhost:3001/vehicle", {
                 method: "POST",
                 credentials: "include",
                 body: {
-                    username: this.form.vehicleName,
-                    password: this.form.regPlate
+                    vehicleName: this.form.vehicleName,
+                    regPlate: this.form.regPlate
                 }
             })
             this.$router.push('/user/user');

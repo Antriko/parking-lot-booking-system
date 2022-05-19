@@ -88,6 +88,7 @@ export default {
 
             document.querySelectorAll('.parkingSpot').forEach(function(spot) {
                 spot.classList.remove("bg-white")
+                spot.classList.remove("selected")
                 spot.classList.remove("bg-light-red")
                 spot.classList.add("bg-light-green")
             });

@@ -198,7 +198,7 @@ app.post('/vehicle', authUser, async (req, res) => {
     vehicle = await db.query(`SELECT * FROM vehicle WHERE UserID=${token.ID}`, { type: Sequelize.QueryTypes.SELECT })
         .catch(e => console.log(e));
 
-    console.log(vehicle)
+    console.log(vehicle, req.body)
 
     if(vehicle.length > 0) {
 

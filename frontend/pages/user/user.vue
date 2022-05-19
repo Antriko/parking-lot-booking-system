@@ -46,6 +46,9 @@ export default {
             </div>
         </div>
         <div class="w-100 mt3 mb3 f2">
+            <NuxtLink class="link black dim b" to="/booking">Create booking</NuxtLink>
+        </div>
+        <div class="w-100 mt3 mb3 f2">
             <NuxtLink class="link black dim b" to="/user/bookings">View bookings</NuxtLink>
         </div>
         <div class="w-100 mt5">
