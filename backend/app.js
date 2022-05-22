@@ -238,3 +238,4 @@ app.get('/getVehicle', authUser, async (req, res) => {
 
 console.log("😄")
 app.listen(3011);
+module.exports = app;

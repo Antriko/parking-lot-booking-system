@@ -1,0 +1,52 @@
+version: '3.7'
+
+services:
+
+  assignmentFrontend:
+    build:
+      context: ./assignmentFrontend
+      dockerfile: Dockerfile
+    command: npm run dev
+    ports: 
+      - 3000:3000
+    restart: always
+    volumes:
+      - ./assignmentFrontend:/assignmentFrontend:rw
+      - ./assignmentFrontend/assignmentFrontend:/assignmentFrontend/assignmentFrontend:rw
+      - /assignmentFrontend/node_modules
+    environment:
+      NODE_ENV: "development"
+      CHOKIDAR_USEPOLLING: "true"
+    stdin_open: true
+
+  assignmentBackend:
+    build:
+      context: ./assignmentBackend
+      dockerfile: Dockerfile
+    ports: 
+      - 3010:3010
+    restart: always
+    command: nodemon
+    volumes:
+      - ./assignmentBackend:/assignmentBackend:rw
+      - ./assignmentBackend/dist:/assignmentBackend/dist:rw
+      - /assignmentBackend/node_modules
+    environment:
+      DB_USERNAME: "${DB_USERNAME}"
+      DB_PASSWORD: "${DB_PASSWORD}"
+      DB_HOST: "${DB_HOST}"
+      JWT_SECRET: "${JWT_SECRET}"
+
+  assignmentDB:
+    image: mysql
+    restart: always
+    ports: 
+      - 3306:3306
+
+    expose: 
+      - 3306
+    volumes:
+      - assignmentDB:/assignmentDB/db
+
+volumes:
+  assignmentDB:
