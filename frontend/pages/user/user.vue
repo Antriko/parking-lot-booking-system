@@ -4,7 +4,7 @@ if (!token._value) {
     navigateTo("/")
 }
 
-var vehicleInfo = await $fetch("http://localhost:3001/getVehicle", {
+var vehicleInfo = await $fetch("http://localhost:3011/getVehicle", {
     credentials: "include"
 })
 </script>
@@ -13,7 +13,7 @@ var vehicleInfo = await $fetch("http://localhost:3001/getVehicle", {
 export default {
     methods: {
         logout: async function() {
-            await $fetch("http://localhost:3001/logout", {
+            await $fetch("http://localhost:3011/logout", {
                 credentials: "include"
             })
             window.location.reload(true)

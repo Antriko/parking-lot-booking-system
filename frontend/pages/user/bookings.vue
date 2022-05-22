@@ -4,7 +4,7 @@ if (!token._value) {
     navigateTo("/user/login")
 }
 
-const data  = await $fetch("http://localhost:3001/bookings", {
+const data  = await $fetch("http://localhost:3011/bookings", {
     credentials: "include",
 })
 

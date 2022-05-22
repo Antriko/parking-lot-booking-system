@@ -1,5 +1,5 @@
 <script setup>
-const { data: data } = await $fetch("http://localhost:3001/verify", {
+const { data: data } = await $fetch("http://localhost:3011/verify", {
     credentials: "include"
 })
 </script>
