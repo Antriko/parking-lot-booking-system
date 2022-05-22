@@ -2,9 +2,9 @@ version: '3.7'
 
 services:
 
-  assignmentFrontend:
+  assignment-frontend:
     build:
-      context: ./assignmentFrontend
+      context: ./frontend
       dockerfile: Dockerfile
     command: npm run dev
     ports: 
@@ -19,9 +19,9 @@ services:
       CHOKIDAR_USEPOLLING: "true"
     stdin_open: true
 
-  assignmentBackend:
+  assignment-backend:
     build:
-      context: ./assignmentBackend
+      context: ./backend
       dockerfile: Dockerfile
     ports: 
       - 3010:3010
@@ -37,7 +37,7 @@ services:
       DB_HOST: "${DB_HOST}"
       JWT_SECRET: "${JWT_SECRET}"
 
-  assignmentDB:
+  assignment-db:
     image: mysql
     restart: always
     ports: 
