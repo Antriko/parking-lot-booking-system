@@ -16,7 +16,7 @@ export default {
     methods: {
         handleSubmit: async function() {
             console.log(this.form)
-            const login = await $fetch("http://localhost:3011/vehicle", {
+            const login = await $fetch("http://localhost:8080/api/vehicle", {
                 method: "POST",
                 credentials: "include",
                 body: {

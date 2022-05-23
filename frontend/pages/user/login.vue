@@ -19,7 +19,7 @@ export default {
     },
     methods: {
         handleSubmit: async function() {
-            const login = await $fetch("http://localhost:3011/login", {
+            const login = await $fetch("http://localhost:8080/api/login", {
                 method: "POST",
                 credentials: "include",
                 body: {

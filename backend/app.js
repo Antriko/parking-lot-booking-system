@@ -14,7 +14,7 @@ require('dotenv').config()
 
 // enable all cors
 const cors = require('cors');
-app.use(cors({credentials: true, origin: "http://localhost:3000"}));
+app.use(cors({credentials: true}));
 
 
 // jwt
@@ -30,6 +30,7 @@ const db = new Sequelize(process.env.DB_DATABASE, process.env.DB_USERNAME, proce
     // logging: false  // Uncomment if want to not see queries ran
 });
 
+
 (async () => {
     // Create database
     await db.query(`CREATE DATABASE IF NOT EXISTS ${process.env.DB_DATABASE}`)
@@ -38,18 +39,18 @@ const db = new Sequelize(process.env.DB_DATABASE, process.env.DB_USERNAME, proce
 
     // Create all needed tables for app
     await db.query("CREATE TABLE IF NOT EXISTS `user` (`ID` int(11) NOT NULL AUTO_INCREMENT, `username` varchar(16) NOT NULL, `password` varchar(16) NOT NULL, PRIMARY KEY (`ID`))")
-        .catch(e => console.log("caught", e))
+        .catch(e => console.log("caught"))
 
     await db.query("CREATE TABLE IF NOT EXISTS `parkinglot`.`bookings` ( `ID` INT NOT NULL AUTO_INCREMENT , `UserID` INT NOT NULL , `timeFrom` DATETIME NOT NULL , `timeTo` DATETIME NOT NULL , `parkingSlot` INT NOT NULL , PRIMARY KEY (`ID`))")
-        .catch(e => console.log("caught", e))
+        .catch(e => console.log("caught"))
 
     await db.query("CREATE TABLE IF NOT EXISTS `vehicle` (`ID` int(11) NOT NULL AUTO_INCREMENT, `UserID` int(11) NOT NULL, `vehicleName` varchar(45) NOT NULL, `vehicleReg` varchar(45) NOT NULL, PRIMARY KEY (`ID`))")
-        .catch(e => console.log("caught", e))
+        .catch(e => console.log(process.env.DB_DATABASE, process.env.DB_USERNAME, process.env.DB_PASSWORD, process.env.DB_HOST))
 })();
 
 
 // User login
-app.post('/login', async (req, res) => {
+app.post('/api/login', async (req, res) => {
     user = await db.query(`SELECT * FROM user WHERE username='${req.body.username}'`, { type: Sequelize.QueryTypes.SELECT })
         .catch(e => console.log(e));
     console.log(req.body, user)
@@ -75,7 +76,7 @@ app.post('/login', async (req, res) => {
     res.status(201).send("Incorrect password");
 })
 
-app.post('/register', async (req, res) => {
+app.post('/api/register', async (req, res) => {
     user = await db.query(`SELECT * FROM user WHERE username='${req.body.username}'`, { type: Sequelize.QueryTypes.SELECT })
         .catch(e => console.log(e));
     console.log(req.body, user, user.length)
@@ -91,7 +92,7 @@ app.post('/register', async (req, res) => {
     res.status(200).send("User created");
 })
 
-app.post('/forgot', async (req, res) => {
+app.post('/api/forgot', async (req, res) => {
     user = await db.query(`SELECT * FROM user WHERE username='${req.body.username}'`, { type: Sequelize.QueryTypes.SELECT })
         .catch(e => console.log(e));
     console.log(req.body, user, user.length)
@@ -107,11 +108,11 @@ app.post('/forgot', async (req, res) => {
     res.status(200).send("Password updated");
 })
 
-app.get('/logout', (req, res) => {
+app.get('/api/logout', (req, res) => {
     res.clearCookie("token").end();
 });
 
-app.get('/verify', authUser, (req, res) => {
+app.get('/api/verify', authUser, (req, res) => {
     jwt.verify(token, secret, (err, dec) => {
         console.log(dec)
         res.status(200).send(dec);
@@ -119,7 +120,7 @@ app.get('/verify', authUser, (req, res) => {
 })
 
 
-app.post('/book', authUser, async (req, res) => {
+app.post('/api/book', authUser, async (req, res) => {
     // 30 minute intervals
     dateFrom = new Date(req.body.dateFrom);
     dateTo = new Date(req.body.dateTo);
@@ -153,7 +154,7 @@ app.post('/book', authUser, async (req, res) => {
     res.status(200).send();
 })
 
-app.post('/availability', authUser, async (req, res) => {
+app.post('/api/availability', authUser, async (req, res) => {
     // 30 minute intervals
     dateFrom = new Date(req.body.dateFrom);
     dateTo = new Date(req.body.dateTo);
@@ -178,7 +179,7 @@ app.post('/availability', authUser, async (req, res) => {
     res.status(200).send(spots);
 })
 
-app.get('/bookings', authUser, async (req, res) => {
+app.get('/api/bookings', authUser, async (req, res) => {
     var token = jwt.verify(req.cookies.token, secret, (err, dec) => {
         if(err) {
             res.sendStatus(201);
@@ -192,7 +193,7 @@ app.get('/bookings', authUser, async (req, res) => {
     res.status(200).send(bookings);
 })
 
-app.post('/vehicle', authUser, async (req, res) => {
+app.post('/api/vehicle', authUser, async (req, res) => {
     var token = jwt.verify(req.cookies.token, secret, (err, dec) => {
         if(err) {
             res.sendStatus(201);
@@ -221,7 +222,7 @@ app.post('/vehicle', authUser, async (req, res) => {
     res.sendStatus(200);
 })
 
-app.get('/getVehicle', authUser, async (req, res) => {
+app.get('/api/getVehicle', authUser, async (req, res) => {
     var token = jwt.verify(req.cookies.token, secret, (err, dec) => {
         if(err) {
             res.sendStatus(201);
@@ -236,6 +237,11 @@ app.get('/getVehicle', authUser, async (req, res) => {
 })
 
 
+app.get('/api/test', async (req, res) => {
+    console.log(req)
+    res.sendStatus(200);
+})
+
+app.listen(8080);
 console.log("😄")
-app.listen(3011);
 module.exports = app;
