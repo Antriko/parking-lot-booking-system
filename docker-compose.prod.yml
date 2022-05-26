@@ -8,7 +8,7 @@ services:
       dockerfile: Dockerfile
     depends_on:
       - assignment-backend
-    command: npm run dev
+    command: PORT=8060 npm run dev
     ports: 
       - 8060:8060
     restart: always

@@ -2,7 +2,7 @@
   "private": true,
   "scripts": {
     "build": "nuxt build",
-    "dev": "nuxt dev --hostname '0' --port 8060",
+    "dev": "nuxt dev --port 8060 --hostname '0' ",
     "generate": "nuxt generate",
     "preview": "nuxt preview"
   },
