@@ -14,7 +14,7 @@ require('dotenv').config()
 
 // enable all cors
 const cors = require('cors');
-app.use(cors({credentials: true}));
+app.use(cors({credentials: true, origin: "http://localhost:3000"}));
 
 
 // jwt

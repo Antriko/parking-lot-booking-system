@@ -19,7 +19,6 @@ services:
     environment:
       NODE_ENV: "development"
       CHOKIDAR_USEPOLLING: "true"
-      API: "assignment-backend"
     stdin_open: true
 
   assignment-backend:
@@ -60,7 +59,7 @@ services:
       - assignmentDB:/assignmentDB/db
     healthcheck:
       test: ["CMD", 'mysqladmin', 'ping', '-h', 'localhost', '-u', 'root', '-p$$MYSQL_ROOT_PASSWORD' ]
-      timeout: 20s
+      timeout: 5s
       retries: 10
 
   assignment-nginx:

@@ -1,7 +1,8 @@
 <script setup>
-const { data: data } = await $fetch("http://localhost:8080/api/verify", {
+const data = await $fetch("http://localhost:8080/api/verify", {
     credentials: "include"
 })
+console.log(data)
 </script>
 
 <template>
