@@ -26,7 +26,8 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     depends_on:
-      - assignment-db
+      assignment-db:
+        condition: service_healthy
     ports: 
       - 8070:8070
     restart: always
