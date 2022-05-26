@@ -67,8 +67,7 @@ services:
       context: ./nginx
       dockerfile: Dockerfile
     depends_on:
-      - assignment-frontend
-      - assignment-backend
+      ['assignment-frontend', 'assignment-backend']
     ports:
       - 80:80
       - 443:443
