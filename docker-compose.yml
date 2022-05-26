@@ -10,7 +10,7 @@ services:
       - assignment-backend
     command: npm run dev
     ports: 
-      - 3000:3000
+      - 8060:8060
     restart: always
     volumes:
       - ./frontend:/frontend:rw
@@ -29,7 +29,7 @@ services:
       assignment-db:
         condition: service_healthy
     ports: 
-      - 8080:8080
+      - 8070:8070
     restart: always
     command: nodemon app.js
     volumes:
