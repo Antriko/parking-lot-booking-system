@@ -3,8 +3,10 @@
 
 <template>
     <div>
-        <Navbar />
-        <NuxtPage />
+        <client-only>
+            <Navbar />
+            <NuxtPage />
+        </client-only>
     </div>
 </template>
 

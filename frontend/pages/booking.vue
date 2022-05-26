@@ -5,7 +5,7 @@ if (!token._value) {
     navigateTo("/user/login")
 }
 
-var vehicleInfo = await $fetch("http://localhost:8080/api/getVehicle", {
+var vehicleInfo = await $fetch("/api/getVehicle", {
     credentials: "include"
 })
 if(vehicleInfo.length > 0) {
@@ -77,7 +77,7 @@ export default {
             this.gridMessage = "Click on grid";
 
             console.log(this.dateFrom, this.dateTo)
-            const slots = await $fetch("http://localhost:8080/api/availability", {
+            const slots = await $fetch("/api/availability", {
                 method: "POST",
                 credentials: "include",
                 body: {
@@ -116,7 +116,7 @@ export default {
             }
             console.log(this.dateTo, this.dateFrom, this.spotSelected)
             
-            const booking = await $fetch("http://localhost:8080/api/book", {
+            const booking = await $fetch("/api/book", {
                 method: "POST",
                 credentials: "include",
                 body: {

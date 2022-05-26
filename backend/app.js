@@ -14,7 +14,7 @@ require('dotenv').config()
 
 // enable all cors
 const cors = require('cors');
-app.use(cors({credentials: true, origin: "http://localhost:3000"}));
+app.use(cors({credentials: true, origin: "http://localhost:8060"}));
 
 
 // jwt
@@ -242,6 +242,6 @@ app.get('/api/test', async (req, res) => {
     res.sendStatus(200);
 })
 
-app.listen(8080);
+app.listen(8070);
 console.log("😄")
 module.exports = app;

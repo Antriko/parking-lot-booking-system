@@ -19,7 +19,7 @@ export default {
     },
     methods: {
         handleSubmit: async function() {
-            const reset = await $fetch("http://localhost:8080/api/forgot", {
+            const reset = await $fetch("/api/forgot", {
                 method: "POST",
                 credentials: "include",
                 body: {

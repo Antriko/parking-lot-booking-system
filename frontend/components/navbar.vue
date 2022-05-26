@@ -1,5 +1,5 @@
 <script setup>
-const data = await $fetch("http://localhost:8080/api/verify", {
+const { data: data } = await $fetch("/api/verify", {
     credentials: "include"
 })
 console.log(data)

@@ -18,8 +18,8 @@ RUN npm install
 RUN npm run build
 
 ENV NUXT_HOST=LOCALHOST
-ENV NUXT_PORT=3000
+ENV NUXT_PORT=8060
 
-EXPOSE 3000 
+EXPOSE 8060 
 
 ENTRYPOINT ["node", ".output/server/index.mjs"]
