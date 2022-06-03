@@ -211,9 +211,8 @@ app.post('/api/vehicle', authUser, async (req, res) => {
     vehicle = await db.query(`SELECT * FROM vehicle WHERE UserID=${token.ID}`, { type: Sequelize.QueryTypes.SELECT })
         .catch(e => console.log(e));
 
-    console.log(vehicle, req.body)
-
-    if(vehicle) {
+    console.log(vehicle)
+    if(vehicle.length > 0) {
 
         // Update
         await db.query(`UPDATE vehicle SET vehicleName='${req.body.vehicleName}', vehicleReg='${req.body.regPlate}' WHERE UserID=${token.ID}`)
