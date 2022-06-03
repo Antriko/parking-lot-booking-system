@@ -1,22 +1,21 @@
 <script setup>
 // https://github.com/nuxt/framework/issues/3141 - Error When Fast Navigating "Failed to execute 'insertBefore' on 'Node'"
-// const token = useCookie("token")
-// if (!token._value) {
-//     navigateTo("/user/login")
-// }
+const token = useCookie("token")
+if (!token._value) {
+    navigateTo("/user/login")
+}
 
-// var vehicleInfo = await $fetch("/api/getVehicle", {
-//     credentials: "include"
-// })
-// if(vehicleInfo.length > 0) {
-//     vehicleInfo = vehicleInfo[0]
-// } else {
-//     navigateTo("/user/vehicle")
-// }
-
-var vehicleInfo = {
-    vehicleName: "oad",
-    vehicleInfo: "zdad"
+var vehicleInfo = await $fetch("/api/getVehicle", {
+    credentials: "include"
+})
+if(vehicleInfo.length > 0) {
+    vehicleInfo = vehicleInfo[0]
+} else {
+    // navigateTo("/user/vehicle")
+    var vehicleInfo = {
+        vehicleName: "Temporary",
+        vehicleInfo: "Add Vehicle"
+    }
 }
 </script>
 
