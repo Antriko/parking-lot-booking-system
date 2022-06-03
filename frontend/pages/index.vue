@@ -1,6 +1,17 @@
 <script setup>
 const token = useCookie("token")
 </script>
+<script>
+export default {
+    beforeCreate() {
+        document.body.className = 'dark-background';
+    },
+    beforeRouteLeave() {
+        document.body.className = '';
+    },
+}
+</script>
+
 
 <template>
     <div>
@@ -61,6 +72,9 @@ const token = useCookie("token")
         background-color: #adb5bd;
     }
     .two {
+        background-color: #6c757d;
+    }
+    .dark-background {
         background-color: #6c757d;
     }
 </style>

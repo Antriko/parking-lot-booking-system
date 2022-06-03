@@ -37,15 +37,21 @@ export default {
         </div>
 
         <div class="flex flex-column w-100 w-40-l">
-            <label for="name" class="mb2">Vehicle name</label>
-            <input id="name" name="name" class="input-reset w-100 ba pv2 mb4 b-- br1" v-model="form.vehicleName" required>
+            <label for="name" class="mb2 f4">Vehicle name</label>
+            <input id="name" name="name" class="input input-reset w-100 ba pv2 mb4 b-- br1" v-model="form.vehicleName" required>
         </div>
         <div class="flex flex-column w-100 w-40-l">
-            <label for="reg" class="mb2">Registration plate</label>
-            <input id="reg" name="reg" class="input-reset w-100 ba pv2 mb4 b-- br1" v-model="form.regPlate" required>
+            <label for="reg" class="mb2 f4">Registration plate</label>
+            <input id="reg" name="reg" class="input input-reset w-100 ba pv2 mb4 b-- br1" v-model="form.regPlate" required>
         </div>
         <div class="flex flex-column w-100 w-40-l">
             <button class="f3 link dim ph4 pv3 mb0 br4 dib white bg-black">Add vehicle</button>
         </div>
     </form>
 </template>
+
+<style scoped> 
+.input {
+    background-color: #DEE2E6;
+}
+</style>

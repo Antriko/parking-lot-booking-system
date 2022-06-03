@@ -20,6 +20,6 @@ body {
     display: flex;
     flex-direction: column;
     margin: 0;
-    background-color: #6c757d;
+    background-color: #DEE2E6;
 }
 </style>
