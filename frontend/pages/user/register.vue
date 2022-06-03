@@ -63,7 +63,7 @@ export default {
                 <input id="username" name="username" class="input-reset w-100 ba pa2 mb4 b-- br1" v-model="form.username" required>
 
                 <label for="password" class="mb2 f4">Password</label>
-                <input id="password" name="password" class="input-reset w-100 ba pa2 mb4 b-- br1" v-model="form.password" required>
+                <input id="password" name="password" class="input-reset w-100 ba pa2 mb4 b-- br1" type="password" v-model="form.password" required>
             </div>
 
             <div class="flex flex-wrap w-100">
