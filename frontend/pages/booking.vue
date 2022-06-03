@@ -1,23 +1,23 @@
 <script setup>
 // https://github.com/nuxt/framework/issues/3141 - Error When Fast Navigating "Failed to execute 'insertBefore' on 'Node'"
-const token = useCookie("token")
-if (!token._value) {
-    navigateTo("/user/login")
-}
-
-var vehicleInfo = await $fetch("/api/getVehicle", {
-    credentials: "include"
-})
-if(vehicleInfo.length > 0) {
-    vehicleInfo = vehicleInfo[0]
-} else {
-    navigateTo("/user/vehicle")
-}
-
-// var vehicleInfo = {
-//     vehicleName: "oad",
-//     vehicleInfo: "zdad"
+// const token = useCookie("token")
+// if (!token._value) {
+//     navigateTo("/user/login")
 // }
+
+// var vehicleInfo = await $fetch("/api/getVehicle", {
+//     credentials: "include"
+// })
+// if(vehicleInfo.length > 0) {
+//     vehicleInfo = vehicleInfo[0]
+// } else {
+//     navigateTo("/user/vehicle")
+// }
+
+var vehicleInfo = {
+    vehicleName: "oad",
+    vehicleInfo: "zdad"
+}
 </script>
 
 <script>
@@ -39,7 +39,7 @@ export default {
             // Check if spot is available?
 
             // Can't select before choosing time and invalid times
-            if ([...event.target.classList].includes("bg-white") || [...event.target.classList].includes("bg-light-red")) {
+            if ([...event.target.classList].includes("bg-selection") || [...event.target.classList].includes("bg-light-red")) {
                 return
             }
 
@@ -91,7 +91,7 @@ export default {
             })
 
             document.querySelectorAll('.parkingSpot').forEach(function(spot) {
-                spot.classList.remove("bg-white")
+                spot.classList.remove("bg-selection")
                 spot.classList.remove("selected")
                 spot.classList.remove("bg-light-red")
                 spot.classList.add("bg-light-green")
@@ -189,11 +189,11 @@ export default {
                     </div>
                     <div class="w-40-l w-25 f5-l f6 tr">{{ gridMessage }}</div>
                 </div>
-                <div class="selection w-100 flex flex-wrap v-mid">
-                    <div class="parkingSpot w-10 h3 h4-m h5-l outline tc f4 f2-l flex flex-column justify-center grow" v-for="i in 10" :key="i" :id="'Parking'+i" v-on:click="changeZone">{{ i }}</div>
+                <div class="w-100 flex flex-wrap v-mid">
+                    <div class="parkingSpot bg-selection w-10 h3 h4-m h5-l outline tc f4 f2-l flex flex-column justify-center grow" v-for="i in 10" :key="i" :id="'Parking'+i" v-on:click="changeZone">{{ i }}</div>
                 </div>
-                <div class="selection w-100 flex flex-wrap v-mid mt3 mt4-m mt5-l">
-                    <div class="parkingSpot w-10 h3 h4-m h5-l outline tc f4 f2-l flex flex-column justify-center grow" v-for="i in 10" :key="i" :id="'Parking'+(i+10)" v-on:click="changeZone">{{ i+10 }}</div>
+                <div class="w-100 flex flex-wrap v-mid mt3 mt4-m mt5-l">
+                    <div class="parkingSpot bg-selection w-10 h3 h4-m h5-l outline tc f4 f2-l flex flex-column justify-center grow" v-for="i in 10" :key="i" :id="'Parking'+(i+10)" v-on:click="changeZone">{{ i+10 }}</div>
                 </div>
             </div>
         </form>
@@ -201,7 +201,7 @@ export default {
 </template>
 
 <style scoped>
-    .selection {
+    .bg-selection {
         background-color: #E9ECEF;
     }
     .parkingSpot:hover {
