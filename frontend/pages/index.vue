@@ -20,7 +20,7 @@ export default {
                 <div class="flex pa3 pa5-l w-100 w-40-l">
                     <div class="flex flex-wrap justify-around w-100 mt3 mb3">
                         <div class="w-100">
-                            <p class="b f2 black lh-solid">Parking Lot Booking Systemssss</p>
+                            <p class="b f2 black lh-solid">Parking Lot Booking System</p>
                             <p class="f3">A web application in which the main functionality is to reserve a parking spot, there will be no conflicts between bookings so everyone who books gets the spot they've chosen at the time without any hassle.</p>
                         </div>
                         <div class="w-100">
