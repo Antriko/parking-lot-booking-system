@@ -45,7 +45,7 @@ export default {
             <input id="reg" name="reg" class="input-reset w-100 ba pv2 mb4 b-- br1" v-model="form.regPlate" required>
         </div>
         <div class="flex flex-column w-100 w-40-l">
-            <button class="w-50 w-25-m button-reset link dim pv2 bg-white pointer">Change vehicle</button>
+            <button class="f3 link dim ph4 pv3 mb0 br4 dib white bg-black">Add vehicle</button>
         </div>
     </form>
 </template>

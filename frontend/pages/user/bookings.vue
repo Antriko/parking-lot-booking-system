@@ -19,7 +19,7 @@ const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'num
         <div v-if="!data">Loading???</div>
         <div v-else class="w-100 flex flex-wrap-reverse">
             <div class="w-100 flex flex-wrap-reverse" v-for="bookings in data" :key="bookings">
-                <div class="w-100 w-100-m w-75-l flex flex-wrap justify-between f3 mt3 pa3 outline grow pointer">
+                <div class="w-100 w-100-m w-75-l flex flex-wrap justify-between f3 mt3 pa3 outline grow pointer booking">
                     <div class="w-100 w-10-l flex flex-column mb3 mb0-l">
                         <div class="w-100 b">
                             Parking spot
@@ -66,3 +66,9 @@ const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'num
         </div>
     </div>
 </template>
+
+<style scoped>
+.booking {
+    background-color: #DEE2E6;
+}
+</style>

@@ -2,13 +2,12 @@
 const { data: data } = await $fetch("/api/verify", {
     credentials: "include"
 })
-console.log(data)
 </script>
 
 <template>
-    <nav class="flex justify-between white bg-dark-gray">
+    <nav class="flex justify-between white bg-dark-gray nav">
         <div class="flex pa3">
-            <NuxtLink class="link white dim mh1 pa1" to="/">Parking lot booking system</NuxtLink>
+            <NuxtLink class="link white dim mh1 pa1" to="/">Parking</NuxtLink>
         </div>
 
         

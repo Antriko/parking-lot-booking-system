@@ -17,6 +17,12 @@ export default {
             message: "",
         }
     },
+    beforeCreate() {
+        document.body.className = 'hideOverflow';
+    },
+    beforeRouteLeave() {
+        document.body.className = '';
+    },
     methods: {
         handleSubmit: async function() {
             const reset = await $fetch("/api/forgot", {
@@ -42,34 +48,33 @@ export default {
 </script>
 
 <template>
-    <div class="flex flex-wrap form-design">
-        <form class="pa4 pt7-l pa5-l w-100 w-30-l bg-white ml6-l vh-100" @submit.prevent="handleSubmit">
+    <div class="flex form-design">
+        <form class="flex flex-column justify-center pa4 pa5-l w-100 w-30-l ml6-l form" @submit.prevent="handleSubmit">
             <div class="flex flex-wrap w-100 pb3">
                 <div class="w-50 black b f2">
-                    Forgot
+                    Forgot password
                 </div>
                 <div class="w-50 red self-end tr" v-if="message">
                     {{ message }}
                 </div>
             </div>
             <div class="flex flex-wrap w-100">
-                <label for="username" class="mb2">Username</label>
+                <label for="username" class="mb2 f4">Username</label>
                 <input id="username" name="username" class="input-reset w-100 ba pa2 mb4 b-- br1" v-model="form.username" required>
 
-                <label for="password" class="mb2">New Password</label>
+                <label for="password" class="mb2 f4">New Password</label>
                 <input id="password" name="password" class="input-reset w-100 ba pa2 mb4 b-- br1" v-model="form.password" required>
             </div>
-            <div class="flex flex-wrap w-100 w-30-l">
-                <button class="w-100 w-25-m button-reset link dim br1 ph3 pv2 mb2 bg-white pointer">Reset</button>
+
+
+
+            <div class="flex flex-wrap w-100">
+                <button class="w-100 f3 link dim ph4 pv3 mb4 br4 dib white bg-black pointer">Reset password</button>
             </div>
 
-            <div class="flex flex-column mt5-l">
-                <div class="mv1 pv1">
-                    <NuxtLink class="link btn black dim mv1 pv1" to="/user/login">Login</NuxtLink>
-                </div>
-                <div class="mv1 pv1">
-                    <NuxtLink class="link black dim" to="/user/register">Register</NuxtLink>
-                </div>
+            <div class="flex flex-wrap justify-around mt2-l tc">
+                <NuxtLink class="w-100 f3 link dim ph4 pv3 mb2 br4 dib white bg-black" to="/user/login">Login</NuxtLink>
+                <NuxtLink class="w-100 f3 link dim ph4 pv3 mb2 br4 dib white bg-black" to="/user/register">Register</NuxtLink>
             </div>
         </form>
     </div>

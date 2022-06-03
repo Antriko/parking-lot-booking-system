@@ -17,6 +17,12 @@ export default {
             message: "",
         }
     },
+    beforeCreate() {
+        document.body.className = 'hideOverflow';
+    },
+    beforeRouteLeave() {
+        document.body.className = '';
+    },
     methods: {
         handleSubmit: async function() {
             const login = await $fetch("/api/login", {
@@ -42,8 +48,8 @@ export default {
 </script>
 
 <template>
-    <div class="flex flex-wrap form-design">
-        <form class="pa4 pt7-l pa5-l w-100 w-30-l bg-white ml6-l vh-100" @submit.prevent="handleSubmit">
+    <div class="flex form-design">
+        <form class="flex flex-column justify-center pa4 pa5-l w-100 w-30-l ml6-l form" @submit.prevent="handleSubmit">
             <div class="flex flex-wrap w-100 pb3">
                 <div class="w-50 black b f2">
                     Login
@@ -53,23 +59,19 @@ export default {
                 </div>
             </div>
             <div class="flex flex-wrap w-100">
-                <label for="username" class="mb2">Username</label>
+                <label for="username" class="mb2 f4">Username</label>
                 <input id="username" name="username" class="input-reset w-100 ba pa2 mb4 b-- br1" v-model="form.username" required>
 
-                <label for="password" class="mb2">Password</label>
+                <label for="password" class="mb2 f4">Password</label>
                 <input id="password" name="password" class="input-reset w-100 ba pa2 mb4 b-- br1" v-model="form.password" required>
             </div>
-            <div class="flex flex-wrap w-100 w-30-l">
-                <button class="w-100 w-25-m button-reset link dim br2 ph3 pv2 mb2 bg-white pointer">Login</button>
-            </div>
 
-            <div class="flex flex-column mt5-l">
-                <div class="mv1 pv1">
-                    <NuxtLink class="link black dim" to="/user/register">Register</NuxtLink>
-                </div>
-                <div class="mv1 pv1">
-                    <NuxtLink class="link black dim" to="/user/reset">Forgot</NuxtLink>
-                </div>
+            <div class="flex flex-wrap w-100">
+                <button class="w-100 f3 link dim ph4 pv3 mb4 br4 dib white bg-black pointer">Login</button>
+            </div>
+            <div class="flex flex-wrap justify-around mt2-l tc">
+                <NuxtLink class="w-100 f3 link dim ph4 pv3 mb2 br4 dib white bg-black" to="/user/register">Register</NuxtLink>
+                <NuxtLink class="w-100 f3 link dim ph4 pv3 mb2 br4 dib white bg-black" to="/user/reset">Forgot password?</NuxtLink>
             </div>
 
         </form>
@@ -82,5 +84,15 @@ export default {
         background: url("@/assets/images/two.jpg") no-repeat center center fixed;
         background-size: cover;
     }
+}
+.hideOverflow {
+    overflow: hidden;
+}
+.form {
+    height: 96vh;
+    background-color: #DEE2E6;
+}
+input {
+    background-color: #DEE2E6;
 }
 </style>

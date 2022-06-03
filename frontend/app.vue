@@ -15,8 +15,11 @@
 
 @import url("https://fonts.googleapis.com/css?family=Nunito");
 body {
-    height: 100vh;
     font-family: "Nunito";
-    overflow: hidden;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    background-color: #6c757d;
 }
 </style>
