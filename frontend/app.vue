@@ -30,4 +30,8 @@ body {
     margin: 0;
     background-color: #DEE2E6;
 }
+
+body::-webkit-scrollbar {
+    display: none;
+}
 </style>
