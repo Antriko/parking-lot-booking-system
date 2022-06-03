@@ -14,6 +14,10 @@ if(vehicleInfo.length > 0) {
     navigateTo("/user/vehicle")
 }
 
+// var vehicleInfo = {
+//     vehicleName: "oad",
+//     vehicleInfo: "zdad"
+// }
 </script>
 
 <script>
@@ -138,7 +142,7 @@ export default {
 
 
 <template>
-    <div class="pa3 pa5-l">
+    <div class="pa3 pa5-l parking">
         <form class="w-100 flex flex-wrap-l flex-wrap-reverse justify-around" @submit.prevent="handleSubmit">
             <div class="w-100 w-30-l flex flex-column justify-between">
 
@@ -173,7 +177,7 @@ export default {
                             Not it? <NuxtLink class="link black dim b" to="/user/user">Change here</NuxtLink>
                         </div>
                     </div>
-                    <button class="w-100 w-25-m button-reset link br2 ph3 pv2 dim bg-white pointer" id="submitButton">Book</button>
+                    <button class="w-100 w-25-m f3 link dim ph4 pv3 mb0 br4 dib white bg-black" id="submitButton">Book</button>
                     <div class="w-100 pa3 mt1 f3 red tc">{{message}}</div>
                 </div>
 
@@ -186,10 +190,10 @@ export default {
                     <div class="w-40-l w-25 f5-l f6 tr">{{ gridMessage }}</div>
                 </div>
                 <div class="selection w-100 flex flex-wrap v-mid">
-                    <div class="parkingSpot w-10 h3 h4-m h5-l outline tc f4 f2-l flex flex-column justify-center grow bg-white" v-for="i in 10" :key="i" :id="'Parking'+i" v-on:click="changeZone">{{ i }}</div>
+                    <div class="parkingSpot w-10 h3 h4-m h5-l outline tc f4 f2-l flex flex-column justify-center grow" v-for="i in 10" :key="i" :id="'Parking'+i" v-on:click="changeZone">{{ i }}</div>
                 </div>
                 <div class="selection w-100 flex flex-wrap v-mid mt3 mt4-m mt5-l">
-                    <div class="parkingSpot w-10 h3 h4-m h5-l outline tc f4 f2-l flex flex-column justify-center grow bg-white" v-for="i in 10" :key="i" :id="'Parking'+(i+10)" v-on:click="changeZone">{{ i+10 }}</div>
+                    <div class="parkingSpot w-10 h3 h4-m h5-l outline tc f4 f2-l flex flex-column justify-center grow" v-for="i in 10" :key="i" :id="'Parking'+(i+10)" v-on:click="changeZone">{{ i+10 }}</div>
                 </div>
             </div>
         </form>
@@ -197,10 +201,17 @@ export default {
 </template>
 
 <style scoped>
+    .selection {
+        background-color: #E9ECEF;
+    }
     .parkingSpot:hover {
         z-index: 1;
     }
     .selected {
-        background-color: #eee !important;
+        background-color: #495057 !important;
+        color: white;
+    }
+    .parking {
+        background-color: #DEE2E6
     }
 </style>
