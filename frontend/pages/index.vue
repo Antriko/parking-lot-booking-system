@@ -4,10 +4,10 @@ const token = useCookie("token")
 <script>
 export default {
     beforeCreate() {
-        document.body.className = 'dark-background';
+        document.body.style.backgroundColor = "#6c757d";
     },
     beforeRouteLeave() {
-        document.body.className = '';
+        document.body.style.backgroundColor = "#adb5bd";
     },
 }
 </script>
@@ -75,6 +75,6 @@ export default {
         background-color: #6c757d;
     }
     .dark-background {
-        background-color: #6c757d;
+        background-color: #6c757d !important;
     }
 </style>
