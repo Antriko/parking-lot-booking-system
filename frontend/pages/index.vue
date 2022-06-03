@@ -43,7 +43,7 @@ export default {
                 <div class="flex pa3 pa5-l w-100 w-40-l">
                     <div class="w-100 mb3 self-end tr">
                         <NuxtLink class="f3 link dim ph4 pv3 mb0 br4 dib white bg-black" to="https://github.com/Antriko/parking-lot-booking-system">github repo</NuxtLink>
-                        <p class="b f3 f2-ns mt4 black lh-solid mb1">Created and designed by Antriko H.</p>
+                        <p class="b f3 mt4 black lh-solid mb1">Created and designed by<br/><span class="f2">Antriko H.</span></p>
                     </div>
                 </div>
             </div>
