@@ -213,7 +213,7 @@ app.post('/api/vehicle', authUser, async (req, res) => {
 
     console.log(vehicle, req.body)
 
-    if(vehicle.length > 0) {
+    if(vehicle) {
 
         // Update
         await db.query(`UPDATE vehicle SET vehicleName='${req.body.vehicleName}', vehicleReg='${req.body.regPlate}' WHERE UserID=${token.ID}`)
