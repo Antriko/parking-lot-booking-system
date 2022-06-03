@@ -1,4 +1,12 @@
 <script setup>
+useHead({
+    title: 'Parking',
+    link: [{
+        rel: 'icon', 
+        type: 'image/x-icon', 
+        href: "/assets/images/favicon.ico" 
+    }],
+})
 </script>
 
 <template>
